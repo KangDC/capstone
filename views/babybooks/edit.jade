@@ -1,0 +1,75 @@
+extends ../layout
+
+block content
+  .container
+    if babybook.id
+      h1.page-header 글수정
+    else
+      h1.page-header 육아일기 작성하기
+
+    form(action = (babybook.id) ? "/babybooks/#{babybook.id}?_method=PUT" : "/babybooks", method='POST')
+      .form-group
+        label(for='atcRcd') #{user.babyName}의 활동기록 첨부 여부
+          if(babybook.atcRcd)
+            input(type='radio', id='atcRcdY', name='atcRcd', value=false)
+            span 예
+            input(type='radio', id='atcRcdN', name='atcRcd', value=true, checked)
+            span 아니오
+          else 
+            input(type='radio', id='atcRcdY', name='atcRcd', value=false, checked)
+            span 예
+            input(type='radio', id='atcRcdN', name='atcRcd', value=true)
+            span 아니오
+      #pannelSlide.form-group
+        span From
+        div#fromAtcRcd.input-group
+          input.form-control(type='text', id='fromDate',name='fromDate', placeholder="From", value=moment(babybook.fromDate).format('YYYY-MM-DD HH:mm:ss'))
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        span To
+        div#toAtcRcd.input-group
+          input.form-control(type='text', id='toDate',name='toDate', placeholder="To", value=moment(babybook.toDate).format('YYYY-MM-DD HH:mm:ss'))
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        button#atcRcdBtn.btn.btn-info.btn-block(type='button') 조회 입력
+        .form-group
+          label(for='avgTemp') 평균 온도 : 
+          input.form-control(type='text', id='avgTemp', name='avgTemp', value=babybook.avgTemp)
+        .form-group
+          label(for='avgHumi') 평균 습도 : 
+          input.form-control(type='text', id='avgHumi', name='avgHumi', value=babybook.avgHumi)
+        .form-group
+          label(for='cryHour') 가장 많이 운 시간대 : 
+          input.form-control(type='text', id='cryHour', name='cryHour', value=babybook.cryHour)
+        .form-group
+          label(for='actHour') 가장 활동량이 많은 시간대 : 
+          input.form-control(type='text', id='actHour', name='actHour', value=babybook.actHour)
+      .form-group
+        //label(for='email') Email address
+        input.form-control(type='hidden', id='email', name='email', placeholder='Email', value=user.email)
+        //p.form-control-static #{user.email}
+      .form-group
+        //label(for='nickname') Nickname
+        input.form-control(type='hidden', id='nickname', name='nickname', placeholder='nickname', value=user.nickname)
+        //p.form-control-static #{user.nickname}
+      .form-group
+        label(for='title') 제목
+        input.form-control(type='text', id='title', name='title', placeholder='title', value=babybook.title)
+      .form-group
+        label(for='content') 내용
+        textarea.form-control(id='content', rows='10', name='content', placeholder='content here')= babybook.content
+      //- .form-group
+      //-   label(for='images') Image 1
+      //-   input.form-control(type="file", name='photos')
+      //- .form-group
+      //-   label(for='images') Image 2
+      //-   input.form-control(type="file", name='photos')
+      //- .form-group
+      //-   label(for='images') Image 3
+      //-   input.form-control(type="file", name='photos')
+      div.form-actions
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+        | 
+        button.btn.btn-primary(type='submit') 완료
+        
+  script(type='text/javascript' src='/javascripts/babybooks.js')

@@ -1,0 +1,83 @@
+extends ../layout
+
+block content
+  .container
+    input(type='hidden', name='userjson', value='#{userjson}')
+    input(type='hidden', name='userTobagi', value='#{user.tobagiNo}')
+    .jumbotron.text-center
+      span.title #{user.babyName}
+      span 의 활동
+    .panel.panel-primary
+      .panel-heading(data-toggle="collapse", href="#decibel")
+        h4.panel-title 소리
+      #decibel.panel-footer.panel-collapse.collapse.in 
+        div#fromDateDecibel.input-group
+          input.form-control(type='text' placeholder="From")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        div#toDateDecibel.input-group
+          input.form-control(type='text' placeholder="To")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        button#decibelBtn.btn.btn-info.btn-block(type='button') 조회
+      #decibel.panel-body.panel-collapse.collapse.in
+        div#decibelGraph.svgGraph
+        
+    .panel.panel-danger
+      .panel-heading(data-toggle="collapse", href="#tempA")
+        h4.panel-title 온도
+      #tempA.panel-footer.panel-collapse.collapse.in
+        div#fromDateTempA.input-group
+          input.form-control(type='text' placeholder="From")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        div#toDateTempA.input-group
+          input.form-control(type='text' placeholder="To")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        button#tempABtn.btn.btn-info.btn-block(type='button') 조회
+      #tempA.panel-body.panel-collapse.collapse.in
+        div#tempAGraph.svgGraph
+        
+    .panel.panel-success
+      .panel-heading(data-toggle="collapse", href="#humiA")
+        h4.panel-title 습도
+      #humiA.panel-footer.panel-collapse.collapse.in
+        div#fromDateHumiA.input-group
+          input.form-control(type='text' placeholder="From")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        div#toDateHumiA.input-group
+          input.form-control(type='text' placeholder="To")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        button#humiABtn.btn.btn-info.btn-block(type='button') 조회
+      #humiA.panel-body.panel-collapse.collapse.in
+        div#humiAGraph.svgGraph
+        
+    .panel.panel-warning
+      .panel-heading(data-toggle="collapse", href="#distActivity")
+        h4.panel-title 활동량
+      #distActivity.panel-footer.panel-collapse.collapse.in
+        div#fromDateDistActivity.input-group
+          input.form-control(type='text' placeholder="From")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        div#toDateDistActivity.input-group
+          input.form-control(type='text' placeholder="To")
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+        button#distActivityBtn.btn.btn-info.btn-block(type='button') 조회
+      #distActivity.panel-body.panel-collapse.collapse.in
+        div#distActivityGraph.svgGraph
+    
+  script(type='text/javascript')
+  
+    
+  script(type='text/javascript' src='/javascripts/monitor.js')
+
+      
+      
+      
+
+    

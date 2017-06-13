@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header #{user.babyName}의 육아일기
+    
+    //| total #{pagination.numbabybooks} babybooks
+    table.table.table-bordered
+      thead
+        tr
+          th 제목
+          th 닉네임
+          th 작성일
+          th 조회수
+      tbody
+        each babybook in babybooks
+          tr
+            td
+              a(href='/babybooks/#{babybook.id}')= babybook.title
+            td= babybook.nickname
+            td= moment(babybook.createdAt).format('YYYY-MM-DD HH:mm:ss')
+            td= babybook.read
+
+    a.btn.btn-primary(href='/babybooks/new' style='float:right') 육아일기 작성
+
+    // Pagination 부분
+  
+    nav.center
+      ul.pagination
+        li(class=pagination.firstPage.cls): a(href=pagination.firstPage.url)
+          span(aria-hidden="true") &laquo;
+        li(class=pagination.prevPage.cls): a(href=pagination.prevPage.url)
+          span(aria-hidden="true") &lt;
+      
+        each page in pagination.pages
+          li(class=page.cls)
+            a(href=page.url): span= page.text
+    
+        li(class=pagination.nextPage.cls): a(href=pagination.nextPage.url)
+          span(aria-hidden="true") &gt;
+        li(class=pagination.lastPage.cls): a(href=pagination.lastPage.url)
+          span(aria-hidden="true") &raquo;
+    
+    form#deleteForm(style='display:none', method="babybook")
+            
+    script(type='text/javascript').
+      $(".delete").click(function(e) {
+        var id = $(e.currentTarget).data('id');
+        if (confirm('정말 삭제하시겠습니까?')) {
+          $("#deleteForm").attr('action', "/babybooks/" + id + "?_method=DELETE").submit();          
+        }
+        return false;
+      });

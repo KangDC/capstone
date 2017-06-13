@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header= babybook.title
+    p
+      if(user.email == babybook.email)
+        p
+          a.btn.btn-default(href='/babybooks/#{babybook.id}/edit') 수정     
+          a.btn.btn-default(href='/babybooks/#{babybook.id}?_method=DELETE') 삭제
+      | 
+      span(style='float: right') #{moment(babybook.createdAt).format('YYYY-MM-DD HH:mm:ss')} 작성
+        |   
+    br
+    
+    if(babybook.atcRcd)
+      ul
+        li  #{moment(babybook.fromDate).format('YYYY년 MM월 DD일 HH시 mm분 ss초')}부터 - #{moment(babybook.toDate).format('YYYY년 MM월 DD일 HH시 mm분 ss초')}까지
+        li 평균 온도: 섭씨 #{babybook.avgTemp} 
+        li 평균 습도: #{babybook.avgHumi} %
+        li 가장 많이 운 시간대: #{babybook.cryHour}시
+        li 가장 활동량이 많은 시간대: #{babybook.actHour}시
+    p.well(style='white-space:pre;')= babybook.content
+    hr
+    a.btn.btn-default(href='/babybooks') 목록
+    

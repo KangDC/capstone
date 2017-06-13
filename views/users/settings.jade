@@ -1,0 +1,49 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header Settings
+    form.form-horizontal(action='/users/settings/#{user._id}?_method=PUT', method='POST')
+      .form-group
+        label.control-label.col-sm-5(for='rcvSMSdB') 울음소리 감지 메시지 수신 여부
+        if(user.rcvSMSdB)
+          input(type='radio', id='rcvSMSdB', name='rcvSMSdB', value=false, checked)
+          span 예
+          input(type='radio', id='rcvSMSdB', name='rcvSMSdB', value=true)
+          span 아니오
+        else
+          input(type='radio', id='rcvSMSdB', name='rcvSMSdB', value=false)
+          span 예
+          input(type='radio', id='rcvSMSdB', name='rcvSMSdB', value=true, checked)
+          span 아니오
+          
+      .form-group
+        label.control-label.col-sm-5(for='rcvSMSTH') 온습도 감지 메시지 수신 여부
+        if(user.rcvSMSTH)
+          input(type='radio', id='rcvSMSTH', name='rcvSMSTH', value=false, checked)
+          span 예
+          input(type='radio', id='rcvSMSTH', name='rcvSMSTH', value=true)
+          span 아니오
+        else
+          input(type='radio', id='rcvSMSTH', name='rcvSMSTH', value=false)
+          span 예
+          input(type='radio', id='rcvSMSTH', name='rcvSMSTH', value=true, checked)
+          span 아니오
+          
+      .form-group
+        label(for='maxTempA') 적정온도 최대기준
+        input.form-control(type='number', id='maxTempA', name='maxTempA', placeholder='적정온도 최대기준', value=user.maxTempA)
+      .form-group
+        label(for='minTempA') 적정온도 최소기준
+        input.form-control(type='number', id='minTempA', name='minTempA', value=user.minTempA)
+      .form-group
+        label(for='maxHumiA') 적정습도 최대기준
+        input.form-control(type='number', id='nickname', name='maxHumiA', value=user.maxHumiA)
+      .form-group
+        label(for='minHumiA') 적정습도 최소기준
+        input.form-control(type='number', id='minHumiA', name='minHumiA', value=user.minHumiA)
+
+      div.form-actions
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+        | 
+        button.btn.btn-primary(type='submit') 수정

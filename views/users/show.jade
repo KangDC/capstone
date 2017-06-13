@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header 회원 정보
+          
+    ul
+      li 회원등급: #{user.auth}
+      li 이메일: #{user.email}
+      li 닉네임: #{user.nickname}
+      li 아가 이름: #{user.babyName}
+      li 가입일: #{moment(user.joinDate).format('YYYY-MM-DD HH:mm:ss')}
+      li 토바기 일련번호: #{user.tobagiNo}
+      li 휴대폰 번호: #{user.phoneNumber}
+
+    hr
+    p
+      if(user.auth == "admin")
+        a.btn.btn-default(href='/users/') 목록
+        |  
+      
+      a.btn.btn-default(href='/users/#{user._id}/edit') 수정
+      | 
+      a.btn.btn-default(href='/users/#{user._id}?_method=DELETE') 삭제
